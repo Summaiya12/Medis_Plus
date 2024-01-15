@@ -1,0 +1,50 @@
+{% include 'partials/header.html' %}
+ <style>
+        .doctor-card {
+            margin: 10px;
+        }
+    </style>
+    <div class="container mt-5">
+        	<div class="section-title">
+							<h2>Our Doctors.</h2>
+							<img src="/static/mimg/section-img.png" alt="#">
+						</div>
+        <div class="row">
+            {% for i in detail %}
+            <div class="col-md-3">
+                <div class="card doctor-card">
+                    <img src="/media/{{i.image}}" class="card-img-top ml-3 h-50 w-75" alt="Doctor 1">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.name}}</h5>
+                        <hr>
+                         <p class="card-text">
+                            <b>Education : </b>{{i.degree}}
+                        </p>
+                        <br>
+                        <p class="card-text">
+                            <b>Days : </b>{{i.days}}
+                        </p>
+                        <br>
+                        <p class="card-text">
+                            <b>Time : </b> {{i.time}}
+                        </p>
+                             <br>
+                         <p class="card-text">
+                            <b>Availability : </b>{{i.available}}
+                        </p>
+                        {% if i.available == "On leave" %}
+                         <br>
+                         <p class="card-text">
+                             <b class="btn">Non-Availability</b>
+                        </p>
+                        {% else %}
+                        <button type="submit" class="btn mt-3"><a href="{% url 'appointment' i.id %}">Book An Appointment</a></button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% include 'partials/footer.html' %}
